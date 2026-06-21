@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Argus Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Argus</h1>
+    <span id="last-updated">Waiting for first check...</span>
+  </header>
+
+  <main id="dashboard">
+    <!-- cards will be injected here by ui.js -->
+  </main>
+
+  <script type="module">
+    import { startUI } from './ui.js'
+    import './engine.js'
+    startUI()
+  </script>
+</body>
+
+</html>

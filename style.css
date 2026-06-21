@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: monospace;
+  background: #0f1117;
+  color: #e2e8f0;
+  padding: 24px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+h1 {
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: #6ee7b7;
+}
+
+#dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #161b27;
+  border: 1px solid #1e2535;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.card--up { border-left: 3px solid #6ee7b7; }
+.card--down { border-left: 3px solid #f87171; }
+.card--pending { border-left: 3px solid #4b5563; }
+
+.card__name { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.card__status { font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
+.card__latency { font-size: 22px; font-weight: 700; color: #6ee7b7; margin-bottom: 4px; }
+.card__uptime { font-size: 10px; color: #4b5563; }
