@@ -15,7 +15,7 @@ const services = [
     name: "Posts API",
     url: "https://jsonplaceholder.typicode.com/posts",
     interval: 20000,
-    threshold: 1000
+    threshold: 1000  
   }
 ]
 

@@ -11,13 +11,27 @@ function createMonitor(service) {
       const response = await fetch(service.url)
       const latency = Date.now() - start
 
+      const status = response.ok && latency < service.threshold ? 'up'
+        : response.ok && latency > service.threshold ? 'degraded'
+          : 'down'
+
       store.recordCheck(service.name, {
         timestamp: Date.now(),
         latency,
-        status: response.ok ? 'up' : 'down',
+        status,
         statusCode: response.status
       })
+
+      if (status === 'degraded' || status === 'down') {
+        store.addAlert(service.name, {
+          timestamp: Date.now(),
+          status,
+          latency
+        })
+      }
+
       window.dispatchEvent(new CustomEvent('argus:update'))
+
     } catch (error) {
       store.recordCheck(service.name, {
         timestamp: Date.now(),
@@ -25,6 +39,13 @@ function createMonitor(service) {
         status: 'down',
         error: error.message
       })
+
+      store.addAlert(service.name, {
+        timestamp: Date.now(),
+        status: 'down',
+        latency: null
+      })
+
       window.dispatchEvent(new CustomEvent('argus:update'))
     }
   }
@@ -53,4 +74,4 @@ function createMonitor(service) {
 config.forEach(service => {
   const monitor = createMonitor(service)
   monitor.start()
-})
+}) 
