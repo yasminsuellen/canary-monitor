@@ -85,6 +85,7 @@ h1 {
 
 .alert-log {
   margin-top: 32px;
+  overflow-x: auto; 
 }
 
 .alert-log h2 {
