@@ -23,6 +23,9 @@ function render() {
   const services = store.getAll()
   const container = document.getElementById('dashboard')
   container.innerHTML = services.map(renderServiceCard).join('')
+
+  const timestamp = document.getElementById('last-updated')
+  timestamp.textContent = `Last updated: ${new Date().toLocaleTimeString()}`
 }
 
 export function startUI() {
