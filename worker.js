@@ -75,17 +75,27 @@ async function check(service) {
     self.postMessage({ type: 'update', data: store.getAll() })
 }
 
+const running = new Set()
+
 function startPolling() {
     config.forEach(service => {
         store.initService(service.name)
+        running.add(service.name)
 
         async function loop() {
+            if (!running.has(service.name)) return
             await check(service)
             setTimeout(loop, service.interval)
         }
 
         loop()
     })
+}
+
+self.onmessage = (event) => {
+    if (event.data.type === 'stop') {
+        running.delete(event.data.name)
+    }
 }
 
 startPolling()
