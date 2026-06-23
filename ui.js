@@ -1,5 +1,3 @@
-import store from './store.js'
-
 function renderServiceCard(service) {
   const uptimePercent = service.uptime.total === 0
     ? 100
@@ -8,7 +6,15 @@ function renderServiceCard(service) {
   const lastCheck = service.history.at(-1)
   const status = lastCheck ? lastCheck.status : 'pending'
   const latency = lastCheck?.latency ?? 'N/A'
-  const p95 = store.getP95(service.name)
+
+  const latencies = service.history
+    .map(c => c.latency)
+    .filter(l => l !== null)
+    .sort((a, b) => a - b)
+
+  const p95 = latencies.length > 0
+    ? latencies[Math.floor(latencies.length * 0.95)]
+    : null
 
   return `
     <div class="card card--${status}">
@@ -21,9 +27,7 @@ function renderServiceCard(service) {
   `
 }
 
-function renderAlertLog() {
-  const services = store.getAll()
-
+function renderAlertLog(services) {
   const allAlerts = services
     .flatMap(service => service.alerts.map(alert => ({
       ...alert,
@@ -61,8 +65,7 @@ function renderAlertLog() {
   `
 }
 
-function render() {
-  const services = store.getAll()
+export function startUI(services) {
   const container = document.getElementById('dashboard')
   container.innerHTML = services.map(renderServiceCard).join('')
 
@@ -70,9 +73,5 @@ function render() {
   timestamp.textContent = `Last updated: ${new Date().toLocaleTimeString()}`
 
   const log = document.getElementById('alert-log')
-  log.innerHTML = renderAlertLog()
-}
-
-export function startUI() {
-  window.addEventListener('argus:update', render)
-}
+  log.innerHTML = renderAlertLog(services)
+} 

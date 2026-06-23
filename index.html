@@ -21,8 +21,14 @@
 
   <script type="module">
     import { startUI } from './ui.js'
-    import './engine.js'
-    startUI()
+
+    const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
+
+    worker.onmessage = (event) => {
+      if (event.data.type === 'update') {
+        startUI(event.data.data)
+      }
+    } 
   </script>
 </body>
 
