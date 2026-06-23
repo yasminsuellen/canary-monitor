@@ -17,16 +17,16 @@ A real-time service health monitoring dashboard built with vanilla JavaScript. *
 - Real-time latency measurement and p95 calculation
 - Threshold-based alerting: UP, DEGRADED, and DOWN status per service
 - Live alert log with timestamps sorted by most recent breach
-- Polling engine runs in a Web Worker — UI never blocks
+- Polling engine runs in a Web Worker - UI never blocks
 - Generator-based mock data simulator for offline demo and testing
 - Zero dependencies, zero build tools
 
 ## Tech Stack
 
-- **Vanilla JavaScript (ES2022)** — ES Modules, async/await, generators, closures
-- **Web Workers** — polling engine runs in a dedicated thread separate from the UI
-- **CSS3** — custom dark theme with grid layout, no utility framework
-- **HTML5** — semantic markup, module scripts
+- **Vanilla JavaScript (ES2022)** - ES Modules, async/await, generators, closures
+- **Web Workers** - polling engine runs in a dedicated thread separate from the UI
+- **CSS3** - custom dark theme with grid layout, no utility framework
+- **HTML5** - semantic markup, module scripts
 
 ## Architecture
 
@@ -44,7 +44,7 @@ ui.js             → renders cards and alert log (pure rendering, no fetch)
 
 ### Web Worker for polling
 
-The entire health check engine runs inside a Web Worker, which means it operates on a separate thread from the browser's main thread. The UI never freezes during network operations, even when multiple endpoints are polled simultaneously. The Worker communicates with the main thread exclusively through `postMessage` — it has no access to the DOM.
+The entire health check engine runs inside a Web Worker, which means it operates on a separate thread from the browser's main thread. The UI never freezes during network operations, even when multiple endpoints are polled simultaneously. The Worker communicates with the main thread exclusively through `postMessage` - it has no access to the DOM.
 
 ### Generator-based mock data
 
@@ -56,7 +56,7 @@ Instead of depending on external APIs for development and demos, the dashboard u
 
 ### Stop control via message passing
 
-Monitors can be stopped individually by sending a `{ type: 'stop', name: serviceName }` message to the Worker. The Worker maintains a `Set` of active service names and exits the polling loop for any service removed from it — without restarting the Worker or affecting other monitors.
+Monitors can be stopped individually by sending a `{ type: 'stop', name: serviceName }` message to the Worker. The Worker maintains a `Set` of active service names and exits the polling loop for any service removed from it - without restarting the Worker or affecting other monitors.
 
 ## Getting Started
 
@@ -94,12 +94,12 @@ const services = [
 
 ```
 canary-monitor/
-├── index.html       # entry point — loads Worker and starts UI
+├── index.html       # entry point - loads Worker and starts UI
 ├── style.css        # dark theme, card grid, alert log table
 ├── config.js        # service list with URLs, intervals and thresholds
 ├── worker.js        # polling engine + store (runs in Web Worker)
 ├── mock.js          # generator-based mock data simulator
-└── ui.js            # pure rendering layer — cards and alert log
+└── ui.js            # pure rendering layer - cards and alert log
 ```
 
 ## How Monitoring Works
