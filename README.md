@@ -114,4 +114,4 @@ canary-monitor/
 
 ---
 
-**Yasmin Suellen** — [GitHub](https://github.com/yasminsuellen) · [LinkedIn](https://www.linkedin.com/in/yasminsuellen/) · [Portfolio](https://yasminsuellendev.vercel.app/)
+**Yasmin Suellen** - [GitHub](https://github.com/yasminsuellen) · [LinkedIn](https://www.linkedin.com/in/yasminsuellen/) · [Portfolio](https://yasminsuellendev.vercel.app/)
