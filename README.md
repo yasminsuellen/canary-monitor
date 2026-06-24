@@ -1,5 +1,5 @@
 # Canary Monitor
-A real-time service health monitoring dashboard built with vanilla JavaScript. **[Click here to live demo.](#)** <!-- add deploy link after Phase 4 -->
+A real-time service health monitoring dashboard built with vanilla JavaScript. **[Click here to live demo.](https://canary-monitor.vercel.app)**
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
