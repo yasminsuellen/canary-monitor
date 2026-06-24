@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Canary Monitor</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header>
-    <h1>Canary Monitor</h1>
-    <span id="last-updated">Waiting for first check...</span>
-  </header>
+  <div class="topbar">
+    <div class="logo">CANARY<span>.monitor</span></div>
+    <div class="status-bar">
+      <span id="last-updated" class="timestamp">connecting...</span>
+      <span class="live-badge"><span class="pulse"></span>LIVE</span>
+    </div>
+  </div>
 
-  <main id="dashboard">
-    <!-- cards will be injected here by ui.js -->
-  </main>
-  <div id="alert-log"></div>
+  <div id="summary"></div>
+  <div class="main-grid">
+    <div id="endpoints"></div>
+    <div id="incidents"></div>
+  </div>
+  <div class="bottom-row" id="charts"></div>
 
   <script type="module">
-  import { startUI } from './ui.js'
+    import { startUI } from './ui.js'
 
-  const wsUrl = location.hostname === 'localhost'
-  ? 'ws://localhost:3001'
-  : 'wss://canary-monitor-production.up.railway.app'
+    const wsUrl = location.hostname === 'localhost'
+      ? 'ws://localhost:3001'
+      : 'wss://canary-monitor-production.up.railway.app'
 
-const ws = new WebSocket(wsUrl) 
-
-  ws.onopen = () => {
-    console.log('connected to server')
-  }
-
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data)
-    startUI(data)
-  }
-
-  ws.onclose = () => {
-    console.log('disconnected from server')
-  }
-</script> 
+    const ws = new WebSocket(wsUrl)
+    ws.onmessage = (event) => startUI(JSON.parse(event.data))
+  </script>
 </body>
-
-</html>
+</html> 
