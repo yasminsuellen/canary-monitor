@@ -20,16 +20,23 @@
   <div id="alert-log"></div>
 
   <script type="module">
-    import { startUI } from './ui.js'
+  import { startUI } from './ui.js'
 
-    const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
+  const ws = new WebSocket('ws://localhost:3001')
 
-    worker.onmessage = (event) => {
-      if (event.data.type === 'update') {
-        startUI(event.data.data)
-      }
-    } 
-  </script>
+  ws.onopen = () => {
+    console.log('connected to server')
+  }
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data)
+    startUI(data)
+  }
+
+  ws.onclose = () => {
+    console.log('disconnected from server')
+  }
+</script> 
 </body>
 
 </html>
