@@ -22,7 +22,11 @@
   <script type="module">
   import { startUI } from './ui.js'
 
-  const ws = new WebSocket('ws://localhost:3001')
+  const wsUrl = location.hostname === 'localhost'
+  ? 'ws://localhost:3001'
+  : 'wss://canary-monitor-production.up.railway.app'
+
+const ws = new WebSocket(wsUrl) 
 
   ws.onopen = () => {
     console.log('connected to server')
