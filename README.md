@@ -9,7 +9,7 @@ A real-time service health monitoring dashboard built with vanilla JavaScript an
 ![No Framework](https://img.shields.io/badge/No_Framework-vanilla-6EE7B7?style=flat-square)
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d71ee915-fa80-42ad-b02e-06bd3d36eb48" alt="Canary Monitor Dashboard" width="100%"/>
+  <img src="https://github.com/user-attachments/assets/60552905-9faa-4b42-96fa-74af29cba566" alt="Canary Monitor Dashboard" width="100%"/>
 </div>
 
 ## Features
